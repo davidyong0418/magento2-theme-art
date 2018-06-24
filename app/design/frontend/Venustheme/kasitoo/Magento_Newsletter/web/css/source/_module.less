@@ -1,0 +1,98 @@
+// /**
+//  * Copyright © 2016 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//    Common
+//--------------------------------------
+
+& when (@media-common = true) {
+
+//
+//    Newsletter subscription
+//--------------------------------------
+
+.block.newsletter {
+    margin-bottom:0;
+    .form.subscribe {
+        display: table;
+        width: 100%;
+    }
+    .fieldset {
+        display: table-cell;
+        margin: 0;
+        padding: 0;
+        vertical-align: top;
+    }
+    .field {
+        margin: 0;
+        position: relative;
+        .control {
+            .lib-icon-font(
+                @icon-envelope,
+                @_icon-font-size: 16px,
+                @_icon-font-line-height: 32px,
+                @_icon-font-color: @form-element-input-placeholder__color,
+                @_icon-font-margin: 0 0 0 8px
+            );
+            &:before {
+                position: absolute;
+            }
+            display: block;
+        }
+    }
+    input {
+        padding-left: 35px;
+    }
+    .block-title {
+        margin-bottom: 30px;
+        strong {
+            text-transform: uppercase;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+    }
+
+    .block-content {
+        .label-text {
+            display: block;
+            font-size: 12px;
+            padding-bottom: 30px;
+        }
+    }
+
+    .label {
+        &:extend(.abs-visually-hidden all);
+    }
+    .actions {
+        display: inline-block;
+        vertical-align: top;
+        position: absolute;
+        top:0;
+        right:0;
+    }
+    .action.subscribe {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+        background: #333;
+        border-color:#333;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+}
+
+}
+
+//
+//    Desktop
+//--------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block.newsletter {
+        width: 83%;
+        margin:0 auto;
+        text-align: center;
+    }
+}

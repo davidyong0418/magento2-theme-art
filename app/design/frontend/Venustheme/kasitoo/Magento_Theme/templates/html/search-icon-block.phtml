@@ -1,0 +1,20 @@
+<div data-block="custom-group-search" class="custom-group-search">
+    <a class="action icon-custom1" data-bind="scope: 'custom-group-search-content'">
+        <span><i class="fa fa-search"></i></span>
+    </a>
+    <div class="block block-custom1"
+             data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=custom-group-search]",
+                "triggerTarget":".icon-custom1",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+        <div id="custom-group-search" data-bind="scope: 'custom-group-search-content'">
+           <?php echo $this->getChildHtml('top_search'); ?>
+        </div>
+    </div>
+</div>

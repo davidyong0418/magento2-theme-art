@@ -1,0 +1,276 @@
+<?php
+use Magento\Framework\App\Action\Action;
+$_vesHelper = $this->helper('Ves\Productlist\Helper\Data');
+$_imgHelper = $this->helper('Ves\Productlist\Helper\Image');
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$blockId = rand().time();
+$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+$html = $classes = '';
+$tabId = 'productlist-'.$blockId;
+
+// General Settings
+$widget_title = $this->getConfig('widget_title');
+$addition_class = $this->getConfig('addition_class');
+$cmsblock = $this->getConfig('cmsblock');
+$pretext_html = $this->getConfig('pretext_html');
+if($cmsblock === 'pretext_html'){
+    $html = base64_decode($pretext_html);
+}elseif($cmsblock!=''){
+    $html = $this->getCmsBlockModel()->load($cmsblock)->getContent();
+}
+$html = $_vesHelper->filter($html);
+
+
+// Tab Settings
+$number_item = $this->getConfig('number_item',12);
+$enable_animate_tab = $this->getConfig('enable_animate_tab');
+$animation_speed = (int)$this->getConfig('animation_speed',"slow");
+$collapsible = $this->getConfig('collapsible');
+$cycle = $this->getConfig('cycle',1000);
+$default_tab = (int)$this->getConfig('default_tab',0);
+$transition_in = $this->getConfig('transition_in',"fadeIn");
+$transition_in_easing = $this->getConfig('transition_in_easing',"swing");
+$transition_out = $this->getConfig('transition_out',"fadeOut");
+$transition_out_easing = $this->getConfig('transition_out_easing',"swing");
+$event = $this->getConfig('event',"click");
+$defaultTabId = '';
+
+
+// Item Settings
+$height_type = $this->getConfig('height_type');
+$custom_item_height = (int)(str_replace("px","",$this->getConfig('custom_item_height', "")));
+$show_name_single_line = $this->getConfig('show_name_single_line');
+if($show_name_single_line){
+    $classes .= ' single-line-name';
+}
+
+
+// OWL Carousel
+$number_item_percolumn = (int)$this->getConfig('number_item_percolumn',200);
+$large_max_items = (int)$this->getConfig('large_max_items',6);
+$large_items = (int)$this->getConfig('large_items',5);
+$portrait_items = (int)$this->getConfig('portrait_items',4);
+$tablet_items = (int)$this->getConfig('tablet_items',4);
+$tablet_small_items = (int)$this->getConfig('tablet_small_items',2);
+$mobile_items = (int)$this->getConfig('mobile_items',1);
+$autoplay = $this->getConfig('autoplay');
+$autoplay_timeout = (int)$this->getConfig('autoplay_timeout',3000);
+$dots = $this->getConfig('dots');
+$nav = $this->getConfig('nav');
+$nav_next = $this->getConfig('nav_next');
+$nav_pre = $this->getConfig('nav_pre');
+$rtl = $this->getConfig('rtl',false);
+$loop = $this->getConfig('loop');
+$ajaxBlockId = 'productlist-owlcarousel-'.$blockId;
+
+// Convert collection to multiple row
+// Default column
+$column = 13;
+$tabs = $this->getTabs();
+foreach ($tabs as $k => $tab) {
+    if(!$tab['ajax_type']){
+        $collection = $this->getProductsBySource($tab['source_id']);
+        $_productCollection = [];
+        $total = $collection->count();
+        // if($total%$number_item_percolumn == 0){
+        //     $column = $total/$number_item_percolumn;
+        // }else{
+        //     $column = floor($total/$number_item_percolumn)+1;
+        // }
+        // if($column<$large_max_items) $column = $large_max_items;
+        $i = $x = 0;
+        foreach ($collection as $_product) {
+            if($i<$column){
+                $i++;
+            }else{
+                $i = 1;
+                $x++;
+            }
+            $_productCollection[$i][$x] = $_product;
+        }
+        $tabs[$k]['productCollection'] = $collection;
+        $tabs[$k]['productCount'] = $total;
+        if($total == 0) unset($tabs[$k]);
+    }
+    if(isset($tabs[$k])){
+        $tabs[$k]['id'] = str_replace('_','-','productlist-'.$tab['source_id'].'-'.rand().time());
+        if(isset($tabs[$k]['position']) && $default_tab && $tabs[$k]['position'] == $default_tab){
+            $defaultTabId = 'tab-'.$tabs[$k]['id'];
+        }
+    }
+}
+$data = $this->getData();
+?>
+
+<!-- a -->
+
+    <div class="block" id="gallery">
+    <div class="container">
+        <h1 class="gallery-h1">Gallery</h1>
+        <p class="subtitle">Discover all our artworks</p>
+        <div class="owl-carousel" id="gallery2">
+            
+            
+            <div>
+                <div class="block-img">
+                    <img class="showcase-img" src="./img/Example5.jpg" alt="">
+                    <div class="block-text">
+                        <div class="row row-conformity">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <p class="title"> Julie Susset </p>
+                                <p class="category" href="#" title="Banana" itemprop="url"> Banana </p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                <p class="price">1 500 €</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+    <?php if(count($tabs)>0){ ?>
+    <div id="easytab-<?php echo $blockId ?>" class="block-img"  >
+       
+       
+        <?php foreach ($tabs as $k => $tab) { ?>
+       
+            <?php
+            $classTmp = 'owl-carousel';
+            if(!isset($tab['productCount']) && !isset($tab['productCount'])){
+                $classTmp = 'owl-carousel';
+            } ?>
+                <?php
+                if(isset($tab['productCount']) && $tab['productCount']>0){
+                    $collection = $tab['productCollection'];
+                    ?>
+                    <?php // Product List ?>
+                    <?php
+                    $data['collection'] = $collection;
+                    echo $this->getProductHtml($data); ?>
+                    <?php } ?>
+
+                <?php // Custom Navigation ?>
+            <?php /* ?>
+            <div class="carousel-controls123">
+                <a class="owl-left" href="javscript:void(0);">
+                    <span class="fa fa-angle-left">Prev</span>
+                </a>
+                <a class="owl-right" href="javscript:void(0);">
+                    <span class="fa fa-angle-right">Next</span>
+                </a>
+            </div>
+            <?php */ ?>
+
+        <?php } ?>
+</div>
+
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Ves_Productlist/js/jquery.easytabs.min',
+        'Ves_Productlist/js/productlist',
+        ], function () {
+            var ajaxUrl = "<?php echo $this->getAjaxUrl() ?>";
+            easyTabInit("<?php echo '#easytab-'.$blockId ?>").bind("easytabs:before",function(e, $clicked, $targetPanel, settings) {
+                jQuery($targetPanel.selector).addClass("paneltab");
+                equalHeight($targetPanel.selector);
+            }).bind("easytabs:after",function(e, $clicked, $targetPanel, settings) {
+                jQuery($targetPanel.selector).removeClass("paneltab");
+            });
+            <?php
+            $conditionProductIdss = $this->getProductsByCondition()->getAllIds();
+            $widgetData = $this->getData();
+            unset($widgetData['pretext_html']);
+            unset($widgetData['tabs']);
+            unset($widgetData['conditions_encoded']);
+            ?>
+            <?php foreach ($tabs as $_tab) { ?>
+                <?php if(isset($_tab['ajax_type']) && $_tab['ajax_type'] == 0){ ?>
+                    owlCarouselInit("<?php echo '#'.$ajaxBlockId ?>", "<?php echo '#'.$_tab['id'].' .owl-carousel' ?>", "");
+                    <?php } ?>
+                    <?php
+                    $data = [];
+                    $data = $widgetData;
+                    $data['ajaxBlockId'] = $ajaxBlockId;
+                    $data['number_item'] = $widgetData['number_item'];
+                    $data['tab'] = $_tab;
+                    $data['conditionProductIds'] = json_encode($conditionProductIdss);
+                    ?>
+                    <?php if(isset($_tab['ajax_type']) && $_tab['ajax_type'] == 1){ ?>
+                        ajaxProducts(<?php echo json_encode($data) ?>, ajaxUrl);
+                        <?php } ?>
+                        <?php if(isset($_tab['ajax_type']) && $_tab['ajax_type'] == 2){ ?>
+                            ajaxClickProduct(<?php echo json_encode($data) ?>, ajaxUrl);
+                            <?php } ?>
+                            <?php } ?>
+
+
+                    jQuery('#sidebarCollapse').on('click', function () {
+                        jQuery('#sidebar').toggleClass('active');
+                    });
+
+                    jQuery(document).ready(function(){
+                        jQuery('#gallery1').owlCarousel({
+                            nav: true,
+                            navText: ["←","→"],
+                            loop:true,
+                            items:1,
+                            margin:0,
+                            stagePadding:0,
+                            smartSpeed:450,
+                            autoHeight:true,
+                            autoplay:true,
+                            autoplayTimeout:4000,
+                            autoplayHoverPause:true,
+                            responsive:{
+                                0:{
+
+                                }
+                            }
+                        });
+                        jQuery('#gallery2').owlCarousel({
+                            nav: true,
+                            navText: ["<span aria-label=\"Previous\">←</span>","<span aria-label=\"Next\">→</span>"],
+                            items:2,
+                            margin:50,
+                            stagePadding:0,
+                            smartSpeed:450,
+                            center: true,
+                            autoplay:false,
+                            autoHeight:true,
+                            responsive:{
+                                0:{
+                                    items:1,
+                                    center: false,
+                                    nav: false,
+                                    margin:0,
+                                },
+                                600:{
+                                    items:2
+                                },
+                                1000:{
+                                    items:2
+                                }
+                            }
+                        });
+
+                        jQuery(document).on('click', 'a[href^="#"]', function (event) {
+                            event.preventDefault();
+                            jQuery('#sidebarCollapse').click();
+
+                            jQuery('html, body').animate({
+                                scrollTop: $($.attr(this, 'href')).offset().top
+                            }, 500);
+                        });
+                    });
+
+
+
+
+
+                        });
+            </script>
+    <?php } ?>

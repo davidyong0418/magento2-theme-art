@@ -1,0 +1,21 @@
+<div data-block="custom-group-setting" class="custom-group-setting">
+    <a class="action icon-custom3" data-bind="scope: 'custom-group-setting-content'">
+        <span><i class="fa fa-cog"></i></span>
+    </a>
+    <div class="block block-custom3"
+             data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=custom-group-setting]",
+                "triggerTarget":".icon-custom3",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+        <div id="custom-group-setting" data-bind="scope: 'custom-group-setting-content'">
+           <?php echo $this->getChildHtml('language_custom') ?>
+           <?php echo $this->getChildHtml('currency_custom') ?>
+        </div>
+    </div>
+</div>

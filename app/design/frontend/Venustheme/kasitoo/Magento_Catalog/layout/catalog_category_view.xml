@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="page.main.title" destination="content" before="-"/>
+        <move element="category.image" destination="content" after="page.main.title"/>
+        <referenceContainer name="sidebar.additional">
+            <block class="Magento\Cms\Block\Block" name="kasitoo-sidebar-products2">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">kasitoo-sidebar-products2</argument>
+                </arguments>
+            </block>
+
+           <!--  <block class="Magento\Cms\Block\Block" name="kasitoo-custom-block">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">kasitoo-custom-block</argument>
+                </arguments>
+            </block> -->
+            
+            <block class="Magento\Cms\Block\Block" name="kasitoo-sidebar-banner" after="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">kasitoo-banner-sidebar</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

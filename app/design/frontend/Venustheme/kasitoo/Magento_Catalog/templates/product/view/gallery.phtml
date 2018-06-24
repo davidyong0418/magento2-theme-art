@@ -1,0 +1,52 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+<?php /* @escapeNotVerified */$product_img_data =  json_decode($block->getGalleryImagesJson());
+    $img_count = count($product_img_data);
+    $product_dir = [];
+    
+
+?>
+
+ <div id="view360">
+</div>
+     
+       
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Ves_Productlist/js/tikslus360'
+        ], function () {
+              jQuery(document).ready(function(){
+                    var ElementWidth = jQuery('.columns .main .details-info-media').width();
+                    var dir = <?php echo json_encode($product_img_data);?>;
+                     jQuery("#view360").tikslus360({imageDir:dir,imageCount:<?php echo $img_count?>,imageExt:'jpg',canvasID:'mycar',canvasWidth:ElementWidth,canvasHeight:ElementWidth*0.75,autoRotate:false});
+                    jQuery(window).on("resize", function(){
+                      var ElementWidth1 = jQuery('.columns .main .details-info-media').width();
+                     var outerHeight = jQuery('.details-info-media').outerHeight();
+                     var outerWidth = jQuery('.details-info-media').outerWidth();
+                     
+                      jQuery("#view360").outerHeight(outerWidth*0.75);
+                      jQuery("#view360").outerWidth(outerWidth);
+                      jQuery("#mycar").outerHeight(outerWidth*0.75);
+                      jQuery("#mycar").outerWidth(outerWidth);
+
+                    });
+              });
+              
+    });
+</script>
+
+
+

@@ -1,0 +1,24 @@
+<div data-block="custom-group-account" class="custom-group-account">
+    <a class="action icon-custom2" data-bind="scope: 'custom-group-account-content'">
+        <span><i class="fa fa-user"></i></span>
+    </a>
+    <div class="block block-custom2"
+             data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=custom-group-account]",
+                "triggerTarget":".icon-custom2",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}'>
+        <div id="custom-group-account" data-bind="scope: 'custom-group-account-content'">
+           
+
+            <?php echo $this->getChildHtml('top.links1')?>
+
+        
+        </div>
+    </div>
+</div>

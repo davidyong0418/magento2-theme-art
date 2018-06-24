@@ -1,0 +1,84 @@
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $current_url = $urlInterface->getCurrentUrl();
+    $base_url = $storeManager->getStore()->getBaseUrl();
+?>
+
+<nav id="sidebar" class="active">
+    <div class="sidebar-header">
+        <h3>Kala & Mann</h3>
+    </div>
+    <?php 
+        if ($current_url == $base_url) {
+    ?>
+        <ul class="list-unstyled components">
+        <li>
+            <a href="#home">Home</a>
+        </li>
+        <li>
+            <a href="#about">About Us</a>
+        </li>
+        <li>
+            <a href="#gallery">Gallery</a>
+        </li>
+        <li>
+            <a href="#contact">Contact Us</a>
+        </li>
+    </ul>
+    <?php
+        # code...
+        }
+        else{
+
+    ?>
+    <ul class="list-unstyled components">
+        <li>
+            <a href="<?php echo $base_url;?>#home">Home</a>
+        </li>
+        <li>
+            <a href="<?php echo $base_url;?>#about">About Us</a>
+        </li>
+        <li>
+            <a href="<?php echo $base_url;?>#gallery">Gallery</a>
+        </li>
+        <li>
+            <a href="<?php echo $base_url;?>#contact">Contact Us</a>
+        </li>
+    </ul>
+    <?php 
+        }
+    ?>
+
+    <div class="navbar-header">
+        <button type="button" id="sidebarCollapse" class="btn btn-info-menu navbar-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sign in</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Cart</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script type="text/javascript">
+    require([
+        'jquery'
+        ],function(){
+            jQuery('#sidebarCollapse').on('click', function () {
+                        jQuery('#sidebar').toggleClass('active');
+                    });
+    });
+</script>

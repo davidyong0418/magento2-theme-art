@@ -1,0 +1,76 @@
+// /**
+//  * Copyright © 2016 Magento. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Extend fallback
+//  _____________________________________________
+
+//  Magento extend fallback handling. Should be EMPTY.
+// Transitions
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+// Transformations
+.scale(@ratio) {
+  -webkit-transform: scale(@ratio);
+      -ms-transform: scale(@ratio); // IE9 only
+       -o-transform: scale(@ratio);
+          transform: scale(@ratio);
+}
+.scale(@ratioX; @ratioY) {
+  -webkit-transform: scale(@ratioX, @ratioY);
+      -ms-transform: scale(@ratioX, @ratioY); // IE9 only
+       -o-transform: scale(@ratioX, @ratioY);
+          transform: scale(@ratioX, @ratioY);
+}
+
+// Opacity
+
+.opacity(@opacity) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}
+
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+// Responsive image
+//
+// Keep images from scaling beyond the width of their parents.
+.img-responsive(@display: block) {
+  display: @display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
+
+.gradient-theme{
+  background: @theme-color-default; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #ffda2e, #2bd664); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #ffda2e, #2bd664); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #ffda2e, #2bd664); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #ffda2e, #2bd664); /* Standard syntax */
+}
+
+.gradient-second{
+  background: #77f3a2; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #77f3a2, #a6e1f9); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #77f3a2, #a6e1f9); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #77f3a2, #a6e1f9); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #77f3a2, #a6e1f9); /* Standard syntax */
+}
+
+.inline-block() {
+   display: inline-block;
+   *display: inline;
+   zoom: 1;   
+}
+

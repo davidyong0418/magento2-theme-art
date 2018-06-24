@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+
+        <css rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" src_type="url" />
+        
+        <css src="//fonts.googleapis.com/css?family=Poppins:400,500,600,700,300" src_type="url"/>
+        <css src="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" src_type="url"/>
+        <css src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" src_type="url"/>
+        <css src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" src_type="url"/>
+        <css src="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous" src_type="url" />
+         <!-- custom css -->
+        
+        <css src="Magento_Catalog/css/source/tikslus360.css" />
+        <!--  -->
+        <css src="Magento_Theme/css/source/animsition.min.css" />
+        <script src="jquery.js" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" src_type="url"/>
+        <!-- <script src="Ves_Productlist/js/animsition.js" /> -->
+        
+         <css src="Magento_Theme/css/source/app.css" />
+
+    
+
+
+    </head>
+</page>

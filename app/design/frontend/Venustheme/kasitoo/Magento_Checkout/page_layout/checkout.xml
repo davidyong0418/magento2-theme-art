@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="empty"/>
+    <referenceContainer name="page.wrapper">
+
+    	<!-- <container name="header.container" as="header_container" label="Page Header Container"  htmlTag="div" htmlClass="page-header" before="-"/> -->
+    	
+
+        <container name="checkout.header.container" as="checkout_header_container" label="Checkout Page Header Container" htmlTag="header" htmlClass="page-header" before="main.content">
+            <container name="checkout.header.wrapper" label="Checkout Page Header" as="checkout_header_wrapper" htmlTag="div" htmlClass="header content"/>
+        </container>
+
+        <container name="footer-container" as="footer" before="before.body.end" label="Page Footer" htmlTag="div" htmlClass="page-footer" />
+    </referenceContainer>
+
+    <referenceContainer name="header.container">
+        <container name="ves-header" as="ves-header" label="Ves Header Container" htmlTag="div" htmlClass="ves-header" before="-"/>
+    </referenceContainer>
+
+    
+    <!-- <move element="checkout_header_container" as="checkout_header_container" destination="ves-header"/> -->
+
+
+</layout>

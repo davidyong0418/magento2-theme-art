@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <update handle="empty"/>
+      
+
+    <referenceContainer name="page.wrapper">
+        <container name="content" remove='true' />
+        <container name="header.container" as="header_container" label="Page Header Container"  htmlTag="div" htmlClass="page-header" before="content" />
+
+        <container name="headernavbar.container" as="headerContainer" label="headernavbar Container" htmlTag="div" htmlClass="headernavbar-container" before="content" >
+            <block class="Magento\Framework\View\Element\Template" name="headernavbar.block" before="-" template="Magento_Theme::html/headernavbar.phtml" />
+       </container>
+       <container name="gallery1.container" as="gallery1" label="gallery1 Container" htmlTag="div" htmlClass="gallery1-container">
+            <block class="Magento\Catalog\Block\Product\AbstractProduct" name="gallery1.block" before="-" template="Magento_Theme::html/gallery1.phtml" />
+       </container>
+        <container name="ves-masstop" as="ves-masstop" label="Page Masstop Container" htmlTag="div" htmlClass="ves-masstop page-main" after="ves-showcase"/>
+        
+       <container name="contactus.container" as="contactusContainer" label="contactus Container" htmlTag="div" htmlClass="contactus-container">
+        <block class="Magento\Framework\View\Element\Template" name="contactus.block" before="-" template="Magento_Theme::html/contactus.phtml">
+        </block>
+       </container>
+
+       <container name="map.container" as="mapContainer" label="map Container" htmlTag="div" htmlClass="map-container">
+        <block class="Magento\Framework\View\Element\Template" name="map.block" before="-" template="Magento_Theme::html/map.phtml">
+        </block>
+       </container>
+
+       
+    </referenceContainer>
+</layout>
