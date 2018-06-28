@@ -12,14 +12,14 @@ Also, used <a href="https://www.webrotate360.com/" >Interactive 3D CAD & 360 Pro
 </br>
 </br>
 
-![1.png](screenshots/1.png)!
+![1.png](screenshots/1.png)
 </br>
-[2.png](screenshots/2.png)!
+![2.png](screenshots/2.png)
 </br>
 </br>
 -Product detail page
 </br>
-[3.png](screenshots/3.png)!
+![3.png](screenshots/3.png)
 
 </br>
 </br>
