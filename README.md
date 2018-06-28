@@ -14,7 +14,7 @@ Also, used <a href="https://www.webrotate360.com/" >Interactive 3D CAD & 360 Pro
 
 ![1.png](screenshots/1.png)!
 </br>
-[2.png](screenshots/2.png)
+![2.png](screenshots/2.png)!
 </br>
 </br>
 -Product detail page
